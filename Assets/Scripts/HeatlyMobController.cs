@@ -1,46 +1,39 @@
 using UnityEngine;
 
-public class MobSpawnController : MonoBehaviour
+public class HeatlyMobController : MonoBehaviour
 {
-    [HideInInspector]
     public GameObject[] waypoints;
     private int currentWaypoint = 0;
     private float lastWaypointSwitchTime;
     public float speed = 1.0f;
 
+    [SerializeField]
+    public bool isDieMob;
+
     void Start()
     {
-        lastWaypointSwitchTime = Time.time;
+            lastWaypointSwitchTime = Time.time;
+            isDieMob = false;
     }
 
     void Update()
     {
-        // 1 
         Vector3 startPosition = waypoints [currentWaypoint].transform.position;
         Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
-        // 2 
         float pathLength = Vector3.Distance (startPosition, endPosition);
         float totalTimeForPath = pathLength / speed;
         float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
         gameObject.transform.position = Vector2.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
-        // 3 
         if (gameObject.transform.position.Equals(endPosition)) 
         {
             if (currentWaypoint < waypoints.Length - 2)
             {
-            // 3.a 
-            currentWaypoint++;
-            lastWaypointSwitchTime = Time.time;
-            // TODO: поворачиваться в направлении движения
+                currentWaypoint++;
+                lastWaypointSwitchTime = Time.time;
             }     
             else
             {
-            // 3.b 
-            Destroy(gameObject);
-
-            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-            AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
-            // TODO: вычитать здоровье
+                Destroy(gameObject);
             }
         }
     }

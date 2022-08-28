@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CommonMobController : MonoBehaviour
+public class SpeedlyMobController : MonoBehaviour
 {
     public GameObject[] waypoints;
     private int currentWaypoint = 0;
