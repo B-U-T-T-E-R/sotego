@@ -1,8 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnMobController : MonoBehaviour
 {
-    //[HideInInspector]
     public int currentCountMobs;
     [SerializeField]
     private GameObject[] mobs;
@@ -10,41 +10,51 @@ public class SpawnMobController : MonoBehaviour
     private int maxCountMobs;
     [SerializeField]
     private float percentageAddCountMobs;
-    [HideInInspector]
+    [SerializeField]
+    private Transform pointSpawn;
+    [SerializeField]
+    private Sprite[] modelMobs;
+    //[HideInInspector]
     private int countWave;
-    [HideInInspector]
-    private int beforeCountWave;
+    //[HideInInspector]
+    //private int beforeCountWave;
     private GameObject mob;
     public int rnd;
+    private SpriteRenderer sr;
 
     void Start()
     {
-        rnd = Random.Range(0, 3);
-        currentCountMobs = 0;
+        sr = GetComponent<SpriteRenderer>();
+
         countWave = 1;
     }
 
     void Update()
     {
-        if(countWave <= 10 && currentCountMobs != maxCountMobs)
+        
+        if(currentCountMobs != maxCountMobs)
         {
-            mob = Instantiate(mobs[0]);
+            if(countWave <= 10)
+            {
+                mob = Instantiate(mobs[0]);
+            }
+            else
+            {
+                mob = Instantiate(mobs[Random.Range(0, 3)], pointSpawn);
+            }
+
             mob.SetActive(true);
-            mob.transform.position = new Vector3(-268.1f, 259.4f, 0);
             currentCountMobs++;
         }
-        if(countWave > 10 && currentCountMobs != maxCountMobs)
-        {
-            mob = Instantiate(mobs[rnd]);
-            mob.SetActive(true);
-            mob.transform.position = new Vector3(-268.1f, 259.4f, 0);
-            currentCountMobs++;
-        }
-        if(beforeCountWave != countWave)
-        {
-            currentCountMobs = 0;
-            rnd = Random.Range(0, 3);
-        }
-        beforeCountWave = countWave;
+
+        Instantiate(modelMobs[Random.Range(0, 3)], pointSpawn);
+
+
+
+        //if(beforeCountWave != countWave)
+        //{
+        //    currentCountMobs = 0;
+        //}
+        //beforeCountWave = countWave;
     }
 }

@@ -1,19 +1,34 @@
 using UnityEngine;
 
-public class CommonMobController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public GameObject[] waypoints;
     private int currentWaypoint = 0;
     private float lastWaypointSwitchTime;
-    public float speed = 1.0f;
+    public float speed;
 
     [SerializeField]
     public bool isDeadMob;
 
     void Start()
     {
-            lastWaypointSwitchTime = Time.time;
-            isDeadMob = false;
+        if(gameObject.CompareTag("Common"))
+        {
+            speed = 50;
+        }
+
+        if(gameObject.CompareTag("Heatly"))
+        {
+            speed = 35;
+        }
+        
+        if(gameObject.CompareTag("Speedy"))
+        {
+            speed = 75;
+        }
+
+        lastWaypointSwitchTime = Time.time;
+        isDeadMob = false;
     }
 
     void Update()

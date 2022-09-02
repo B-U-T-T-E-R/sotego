@@ -8,6 +8,10 @@ TagManager:
   - Base
   - Road
   - Common
+  - CalculatorMobs
+  - Enemy
+  - Heatly
+  - Speedy
   layers:
   - Default
   - TransparentFX
