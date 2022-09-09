@@ -9,23 +9,13 @@ public class SpawnMobController : MonoBehaviour
     [SerializeField]
     private int maxCountMobs;
     [SerializeField]
-    private float percentageAddCountMobs;
-    [SerializeField]
-    private Transform pointSpawn;
-    [SerializeField]
-    private Sprite[] modelMobs;
-    //[HideInInspector]
+    private float percentageAddCountMobs;  
     private int countWave;
-    //[HideInInspector]
-    //private int beforeCountWave;
-    private GameObject mob;
     public int rnd;
-    private SpriteRenderer sr;
+    private GameObject mob;
 
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
-
         countWave = 1;
     }
 
@@ -37,19 +27,18 @@ public class SpawnMobController : MonoBehaviour
             if(countWave <= 10)
             {
                 mob = Instantiate(mobs[0]);
+                
             }
             else
             {
-                mob = Instantiate(mobs[Random.Range(0, 3)], pointSpawn);
+                mob = Instantiate(mobs[Random.Range(0, 3)]);
             }
 
+            mob.transform.position = new Vector2(-268.1f, 259.4f);
+
             mob.SetActive(true);
-            currentCountMobs++;
+            currentCountMobs++;      
         }
-
-        Instantiate(modelMobs[Random.Range(0, 3)], pointSpawn);
-
-
 
         //if(beforeCountWave != countWave)
         //{
