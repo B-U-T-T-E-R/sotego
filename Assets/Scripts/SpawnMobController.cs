@@ -1,17 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpawnMobController : MonoBehaviour
 {
-    public int currentCountMobs;
+    [HideInInspector]
+    private int currentCountMobs;
+    [HideInInspector]
+    private int countWave;
     [SerializeField]
     private GameObject[] mobs;
     [SerializeField]
     private int maxCountMobs;
     [SerializeField]
     private float percentageAddCountMobs;  
-    private int countWave;
-    public int rnd;
     private GameObject mob;
 
     void Start()
@@ -27,7 +27,6 @@ public class SpawnMobController : MonoBehaviour
             if(countWave <= 10)
             {
                 mob = Instantiate(mobs[0]);
-                
             }
             else
             {
@@ -39,11 +38,5 @@ public class SpawnMobController : MonoBehaviour
             mob.SetActive(true);
             currentCountMobs++;      
         }
-
-        //if(beforeCountWave != countWave)
-        //{
-        //    currentCountMobs = 0;
-        //}
-        //beforeCountWave = countWave;
     }
 }

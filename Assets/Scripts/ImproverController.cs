@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class ImproverController : MonoBehaviour
+public class ImproverController : EnemyController
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private float speed;
+    [HideInInspector]
+    private GameObject[] waypoints;
+
     void Start()
     {
-        
+        waypoints = GetComponent<WaypointsManager>().waypoints;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Move(speed, waypoints);
     }
 }
