@@ -5,7 +5,9 @@ public class SpawnMobController : MonoBehaviour
     [HideInInspector]
     private int currentCountMobs;
     [HideInInspector]
-    private int countWave;
+    private int currentCountWave;
+    [HideInInspector]
+    private int beforeCountWave;
     [SerializeField]
     private GameObject[] mobs;
     [SerializeField]
@@ -13,18 +15,21 @@ public class SpawnMobController : MonoBehaviour
     [SerializeField]
     private float percentageAddCountMobs;  
     private GameObject mob;
+    [SerializeField]
+    private float health;
 
     void Start()
     {
-        countWave = 1;
+        beforeCountWave = currentCountWave = 1;
+        percentageAddCountMobs = 0.2f;
+        health = 50;
     }
 
     void Update()
     {
-        
         if(currentCountMobs != maxCountMobs)
         {
-            if(countWave <= 10)
+            if(currentCountWave <= 10)
             {
                 mob = Instantiate(mobs[0]);
             }
@@ -32,11 +37,19 @@ public class SpawnMobController : MonoBehaviour
             {
                 mob = Instantiate(mobs[Random.Range(0, 3)]);
             }
+            if(beforeCountWave != currentCountMobs)
+                percentageAddCountMobs += percentageAddCountMobs;
 
             mob.transform.position = new Vector2(-268.1f, 259.4f);
 
             mob.SetActive(true);
             currentCountMobs++;      
         }
+    }
+
+    public float ChangeStatsMob(float health)
+    {
+        health += health * percentageAddCountMobs;
+        return health;
     }
 }
