@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Heatly
   - Speedy
+  - waypoint
   layers:
   - Default
   - TransparentFX

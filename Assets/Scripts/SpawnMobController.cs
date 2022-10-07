@@ -15,14 +15,11 @@ public class SpawnMobController : MonoBehaviour
     [SerializeField]
     private float percentageAddCountMobs;  
     private GameObject mob;
-    [SerializeField]
-    private float health;
 
     void Start()
     {
         beforeCountWave = currentCountWave = 1;
         percentageAddCountMobs = 0.2f;
-        health = 50;
     }
 
     void Update()
@@ -37,7 +34,7 @@ public class SpawnMobController : MonoBehaviour
             {
                 mob = Instantiate(mobs[Random.Range(0, 3)]);
             }
-            if(beforeCountWave != currentCountMobs)
+            if(beforeCountWave != currentCountWave)
                 percentageAddCountMobs += percentageAddCountMobs;
 
             mob.transform.position = new Vector2(-268.1f, 259.4f);

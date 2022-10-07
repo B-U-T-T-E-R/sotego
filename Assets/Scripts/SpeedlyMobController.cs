@@ -17,6 +17,6 @@ public class SpeedlyMobController : EnemyController
 
     void Update()
     {
-        Move(speed, waypoints);
+    //    Move(speed, waypoints);
     }
 }

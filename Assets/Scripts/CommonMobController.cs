@@ -1,11 +1,10 @@
 using UnityEngine;
-
 public class CommonMobController : EnemyController
 {
     [SerializeField]
     private float speed;
     [SerializeField]
-    private float health = 50;
+    private float health = 75;
     [HideInInspector]
     private GameObject[] waypoints;
 
@@ -16,7 +15,19 @@ public class CommonMobController : EnemyController
     }
 
     void Update()
+    { 
+        Move();
+    }
+    
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        Move(speed, waypoints);
+        if(collision.tag == "waypoint")
+        {
+            target += 1;
+        }
+        else if(collision.tag == "base")
+        {
+            Destroy(gameObject);
+        }
     }
 }

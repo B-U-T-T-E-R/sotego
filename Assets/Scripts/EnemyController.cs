@@ -1,28 +1,36 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class EnemyController : MonoBehaviour
 {
-    private int currentWaypoint = 0;
-    private float lastWaypointSwitchTime;
+    public int target = 0;
+    public Transform exit;
+    public Transform[] wayPoints;
+    public float navigation;
 
-    public void Move(float speed, GameObject[] waypoints)
+    Transform enemy;
+    float navigationTime = 0;
+    void Start()
     {
-        Vector3 startPosition = waypoints [currentWaypoint].transform.position;
-        Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
-        float pathLength = Vector3.Distance (startPosition, endPosition);
-        float totalTimeForPath = pathLength / speed;
-        float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
-        gameObject.transform.position = Vector2.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
-        if (gameObject.transform.position.Equals(endPosition)) 
+        enemy = GetComponent<Transform>();
+    }
+
+    public void Move()
+    {
+        if(wayPoints != null)
         {
-            if (currentWaypoint < waypoints.Length - 2)
+            navigationTime += Time.deltaTime;
+            if(navigationTime > navigation)
             {
-                currentWaypoint++;
-                lastWaypointSwitchTime = Time.time;
-            }     
-            else
-            {
-                Destroy(gameObject);
+                if(target < wayPoints.Length)
+                {
+                    enemy.position = Vector2.MoveTowards(enemy.position, wayPoints[target].position, navigationTime);
+                }
+
+                else
+                {
+                    enemy.position = Vector2.MoveTowards(enemy.position, exit.position, navigationTime);
+                }
+                navigationTime = 0;
             }
         }
     }

@@ -17,6 +17,6 @@ public class HeatlyMobController : EnemyController
 
     void Update()
     {
-        Move(speed, waypoints);
+   //     Move(speed, waypoints);
     }
 }
