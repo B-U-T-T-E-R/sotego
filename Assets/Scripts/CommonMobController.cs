@@ -5,18 +5,10 @@ public class CommonMobController : EnemyController
     private float speed;
     [SerializeField]
     private float health = 75;
-    [HideInInspector]
-    private GameObject[] waypoints;
-
-    void Start()
-    {
-        health = GetComponent<SpawnMobController>().ChangeStatsMob(health);
-        waypoints = GetComponent<WaypointsManager>().waypoints;
-    }
 
     void Update()
-    { 
-        Move();
+    {
+            Move();
     }
     
     public void OnTriggerEnter2D(Collider2D collision)

@@ -25,13 +25,16 @@ public class EnemyController : MonoBehaviour
                 {
                     enemy.position = Vector2.MoveTowards(enemy.position, wayPoints[target].position, navigationTime);
                 }
-
                 else
                 {
                     enemy.position = Vector2.MoveTowards(enemy.position, exit.position, navigationTime);
                 }
+            
                 navigationTime = 0;
             }
+            
+            if(enemy.position == wayPoints[target].position)
+                target++;
         }
     }
 }
