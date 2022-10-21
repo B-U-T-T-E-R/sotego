@@ -98,14 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: 0
   exit: {fileID: 4029787580857023255, guid: a1b7924a4b1a43645b087a78bd9616c1, type: 3}
-  wayPoints:
-  - {fileID: 3757725477709105159, guid: 7dd575c4d694aa74a817170b67837354, type: 3}
-  - {fileID: 8667911283076424641, guid: 226138039f77401448c17ca578c41a20, type: 3}
-  - {fileID: 1578977633647209493, guid: 3726af27f8d2ae74ba5e7360d93ceebe, type: 3}
-  - {fileID: 411374398533328657, guid: d1c6a476d9acd37468ac1f57fb6f4f82, type: 3}
-  - {fileID: 5628320194860424778, guid: 8b33c32a96d67cb4fbc9bb51320aa6bb, type: 3}
-  - {fileID: 8928049510720468823, guid: 48cf23fab777f8940a332a84b7535f18, type: 3}
-  - {fileID: 4029787580857023255, guid: a1b7924a4b1a43645b087a78bd9616c1, type: 3}
+  wayPoints: []
   navigation: 1
   speed: 50
   health: 50

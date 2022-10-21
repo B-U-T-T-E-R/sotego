@@ -6,9 +6,9 @@ public class CommonMobController : EnemyController
     [SerializeField]
     private float health = 75;
 
-    void Update()
+    void LateUpdate()
     {
-            Move();
+        Move();
     }
     
     public void OnTriggerEnter2D(Collider2D collision)

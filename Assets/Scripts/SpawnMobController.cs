@@ -13,7 +13,8 @@ public class SpawnMobController : MonoBehaviour
     [SerializeField]
     private int maxCountMobs;
     [SerializeField]
-    private float percentageAddCountMobs;  
+    private float percentageAddCountMobs;
+    public Transform[] wayPoints;
     private GameObject mob;
 
     void Start()
@@ -23,6 +24,11 @@ public class SpawnMobController : MonoBehaviour
     }
 
     void Update()
+    {
+        Spawn();
+    }
+
+    private void Spawn()
     {
         if(currentCountMobs != maxCountMobs)
         {
@@ -37,9 +43,10 @@ public class SpawnMobController : MonoBehaviour
             if(beforeCountWave != currentCountWave)
                 percentageAddCountMobs += percentageAddCountMobs;
 
+            mob.GetComponent<CommonMobController>().wayPoints = wayPoints;
+
             mob.transform.position = new Vector2(-268.1f, 259.4f);
 
-            mob.SetActive(true);
             currentCountMobs++;      
         }
     }
