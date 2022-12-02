@@ -6,15 +6,19 @@ public class EnemyController : MonoBehaviour
     public Transform exit;
     public Transform[] wayPoints;
     public float navigation;
+    private Vector3 pos;
 
-    Transform enemy;
+    private bool isOnWaypoint;
+    private float speed = 500;
+
+    public Transform enemy;
     float navigationTime = 0;
     void Start()
     {
         enemy = GetComponent<Transform>();
     }
 
-    public void Move()
+    public bool Move()
     {
         if(wayPoints != null)
         {
@@ -23,18 +27,25 @@ public class EnemyController : MonoBehaviour
             {
                 if(target < wayPoints.Length)
                 {
-                    enemy.position = Vector2.MoveTowards(enemy.position, wayPoints[target].position, navigationTime);
+                    pos = Vector2.MoveTowards(this.gameObject.transform.position, wayPoints[target].position, navigationTime);
                 }
                 else
                 {
-                    enemy.position = Vector2.MoveTowards(enemy.position, exit.position, navigationTime);
+                    pos = Vector2.MoveTowards(this.gameObject.transform.position, exit.position, navigationTime);
                 }
+
+                //transform.Translate(pos.x * speed, pos.y, pos.z);
             
                 navigationTime = 0;
             }
             
-            if(enemy.position == wayPoints[target].position)
+            if(this.gameObject.transform.position == wayPoints[target].position)
+            {
                 target++;
+                return true;
+            }
         }
+
+        return false;
     }
 }

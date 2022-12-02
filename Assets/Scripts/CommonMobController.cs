@@ -1,25 +1,23 @@
+using System;
 using UnityEngine;
 public class CommonMobController : EnemyController
 {
+    /*
     [SerializeField]
     private float speed;
+    */
     [SerializeField]
     private float health = 75;
 
-    void LateUpdate()
+    public bool isOnWaypoint;
+
+    void Update()
     {
-        Move();
-    }
-    
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "waypoint")
+        isOnWaypoint = GetComponent<TileController>().OnWaypoint;
+        
+        if(isOnWaypoint == true)
         {
-            target += 1;
-        }
-        else if(collision.tag == "base")
-        {
-            Destroy(gameObject);
+            isOnWaypoint = Move();
         }
     }
 }
