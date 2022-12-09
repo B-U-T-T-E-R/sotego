@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class TileController : MonoBehaviour
 {
-    public bool OnWaypoint;
-    private void OnTriggerEnter2D(Collider2D other)
+    public bool OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
-            OnWaypoint = true;
+        if(other.tag == "Entity")
+            return true;
+        return false;
     }
 }

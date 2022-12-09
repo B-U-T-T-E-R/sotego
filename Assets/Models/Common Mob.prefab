@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1892671590655660212}
   m_Layer: 0
   m_Name: Common Mob
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   exit: {fileID: 4029787580857023255, guid: a1b7924a4b1a43645b087a78bd9616c1, type: 3}
   wayPoints: []
   navigation: 1
-  speed: 50
+  enemy: {fileID: 3964077141177316519}
   health: 50
 --- !u!61 &1892671590655660212
 BoxCollider2D:

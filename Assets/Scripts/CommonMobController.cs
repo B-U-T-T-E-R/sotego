@@ -1,23 +1,30 @@
-using System;
 using UnityEngine;
+
 public class CommonMobController : EnemyController
 {
-    /*
     [SerializeField]
-    private float speed;
-    */
+    private float speed = 50f;
+    private Collider2D mob;
     [SerializeField]
-    private float health = 75;
+    private GameObject tile;
+    private bool CanMove = true;
 
-    public bool isOnWaypoint;
+    void Start()
+    {
+        mob = GetComponent<Collider2D>();
+    }
 
     void Update()
     {
-        isOnWaypoint = GetComponent<TileController>().OnWaypoint;
-        
-        if(isOnWaypoint == true)
+        tile = GameObject.FindWithTag("waypoint");
+        if(CanMove == true)
         {
-            isOnWaypoint = Move();
+            Moving(speed);
+            CanMove = false;
         }
+        
+        CanMove = tile.GetComponent<TileController>().OnTriggerEnter2D(mob);
+
+        Debug.Log(CanMove == true);
     }
 }
