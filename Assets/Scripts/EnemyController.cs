@@ -1,9 +1,9 @@
 using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
-    public Transform[] wayPoints;
     private int currentwayPoints = 0;
     private float lastWaypointSwitchTime;
+    public Transform[] wayPoints;
 
     public void Moving(float mspeed)
     {
@@ -23,9 +23,14 @@ public class EnemyController : MonoBehaviour
                 lastWaypointSwitchTime = Time.time;
             }
             else
-            {
-                Destroy(gameObject);
+            {        
+                Die();
             }
         }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

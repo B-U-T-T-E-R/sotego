@@ -8,16 +8,18 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         if(Input.GetKey(KeyCode.W))
-            transform.Translate(0, -speedCamera * Time.deltaTime, 0);
-        if(Input.GetKey(KeyCode.A))
-            transform.Translate(speedCamera * Time.deltaTime, 0, 0);
-        if(Input.GetKey(KeyCode.S))
             transform.Translate(0, speedCamera * Time.deltaTime, 0);
-        if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.A))
             transform.Translate(-speedCamera * Time.deltaTime, 0, 0);
-        if(Input.GetKey(KeyCode.O))
+        if(Input.GetKey(KeyCode.S))
+            transform.Translate(0, -speedCamera * Time.deltaTime, 0);
+        if(Input.GetKey(KeyCode.D))
+            transform.Translate(speedCamera * Time.deltaTime, 0, 0);
+
+
+        if(Input.GetKey(KeyCode.O) && transform.position.z > -2000)
             transform.Translate(0, 0, -speedCamera * Time.deltaTime);
-        if(Input.GetKey(KeyCode.I))
+        if(Input.GetKey(KeyCode.I) && transform.position.z < -150)
             transform.Translate(0, 0, speedCamera * Time.deltaTime);
         if(Input.GetKeyDown(KeyCode.Tab))
             transform.position = new Vector3(0, 0, -1000);
