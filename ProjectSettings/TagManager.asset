@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Spawn
+  - Base
+  - Road
+  - Common
+  - CalculatorMobs
+  - Enemy
+  - Heatly
+  - Speedy
+  - waypoint
+  - Entity
   layers:
   - Default
   - TransparentFX
