@@ -5,6 +5,8 @@ public class SpawnMobController : MonoBehaviour
     [HideInInspector]
     private int currentCountWave;
     [SerializeField]
+    private Vector2 positionSpawn;
+    [SerializeField]
     private GameObject[] mobs;
     [SerializeField]
     private bool canSpawn;
@@ -15,7 +17,11 @@ public class SpawnMobController : MonoBehaviour
     public int currentCountMobsOnWave;
     public Transform[] wayPoints;
 
-    void Start() => canSpawn = true;
+    void Start()
+    { 
+        positionSpawn = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+        canSpawn = true;
+    }
 
     void Update() => Spawn();
 
@@ -34,16 +40,20 @@ public class SpawnMobController : MonoBehaviour
 
             mob.GetComponent<EnemyController>().wayPoints = wayPoints;
 
-            mob.transform.position = new Vector2(-268.1f, 259.4f);
+            mob.transform.position = positionSpawn;
 
             currentCountMobsOnWave++;
             canSpawn = false;
         }
+
+        canSpawn = canSpawnMethod(mob.transform);
     }
-    
-    public void OnTriggerExit2D(Collider2D other)
+
+    private bool canSpawnMethod(Transform bot)
     {
-        Debug.Log("ddd");
-        canSpawn = true;
+        if(bot.position.x - 36f >= positionSpawn.x || bot.position.y - 36f >= positionSpawn.y)
+            return true;
+
+        return false;
     }
 }

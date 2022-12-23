@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3757725477709105159}
   - component: {fileID: 3757725477709105156}
   - component: {fileID: 3757725477709105158}
+  - component: {fileID: 511511185}
   m_Layer: 0
   m_Name: Spawn mobs 1
-  m_TagString: waypoint
+  m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +100,40 @@ MonoBehaviour:
   - {fileID: 5770253311061181860, guid: 30f21e96151240c40b2b65722bca97b3, type: 3}
   - {fileID: 7824856202644504451, guid: a55eb09610271cb4f8ccfda12540ccd3, type: 3}
   - {fileID: 931154879672353831, guid: 220d91895dc815445bb4fa9c691b6520, type: 3}
+  canSpawn: 0
   maxCountMobs: 20
   currentCountMobsOnWave: 0
-  wayPoints: []
+  wayPoints:
+  - {fileID: 3757725477709105159}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!61 &511511185
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757725477709105157}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 5.12, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.12, y: 5.12}
+  m_EdgeRadius: 0
