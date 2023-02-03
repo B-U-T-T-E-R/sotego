@@ -5,25 +5,25 @@ public class EnemyController : MonoBehaviour
     private float lastWaypointSwitchTime;
     public Transform[] wayPoints;
 
-    public void Moving(float mspeed)
+    public void Moving(float mspeed, Transform h)
     {
-        Vector3 startPosition = wayPoints [currentwayPoints].transform.position;
-        Vector3 endPosition = wayPoints [currentwayPoints + 1].transform.position;
+        Vector3 startPosition = wayPoints[currentwayPoints].transform.position;
+        Vector3 endPosition = wayPoints[currentwayPoints + 1].transform.position;
 
-        float pathLength = Vector3.Distance (startPosition, endPosition);
+        float pathLength = Vector3.Distance(startPosition, endPosition);
         float totalTimeForPath = pathLength / mspeed;
         float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
-        gameObject.transform.position = Vector2.Lerp(startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
+        h.position = Vector2.Lerp(startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
 
-        if(gameObject.transform.position.Equals(endPosition))
+        if (h.position.Equals(endPosition))
         {
-            if(currentwayPoints < wayPoints.Length - 2)
+            if (currentwayPoints < wayPoints.Length - 2)
             {
                 currentwayPoints++;
                 lastWaypointSwitchTime = Time.time;
             }
             else
-            {        
+            {
                 Die();
             }
         }

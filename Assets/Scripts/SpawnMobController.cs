@@ -45,15 +45,12 @@ public class SpawnMobController : MonoBehaviour
             currentCountMobsOnWave++;
             canSpawn = false;
         }
-
-        canSpawn = canSpawnMethod(mob.transform);
+        canSpawn = CanSpawnMethod();
     }
 
-    private bool canSpawnMethod(Transform bot)
+    private bool CanSpawnMethod()
     {
-        if(bot.position.x - 36f >= positionSpawn.x || bot.position.y - 36f >= positionSpawn.y)
-            return true;
-
-        return false;
+        bool f = false;
+        return f = GameObject.FindGameObjectWithTag("CanSpawnBlock");
     }
 }

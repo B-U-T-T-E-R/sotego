@@ -14,6 +14,7 @@ TagManager:
   - Speedy
   - waypoint
   - Entity
+  - CanSpawnBlock
   layers:
   - Default
   - TransparentFX
