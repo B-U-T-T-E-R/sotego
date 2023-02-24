@@ -15,6 +15,7 @@ TagManager:
   - waypoint
   - Entity
   - CanSpawnBlock
+  - CanRotate
   layers:
   - Default
   - TransparentFX
