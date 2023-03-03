@@ -2,16 +2,12 @@ using UnityEngine;
 
 public class wayPointScript : MonoBehaviour
 {
-    [SerializeField]
     public bool CanRotate = false;
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other == gameObject.CompareTag("Entity"))
-        {
-            Debug.Log("TRUE");
+        if (other.gameObject.CompareTag("Entity") || other.transform.position == gameObject.transform.position)
             CanRotate = true;
-        }
-
-        CanRotate = false;
+        else
+            CanRotate = false;
     }
 }

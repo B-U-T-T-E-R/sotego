@@ -4,19 +4,17 @@ public class EnemyController : MonoBehaviour
     public int nextwayPoints = 1;
     public Transform[] wayPoints;
     private Rigidbody2D rb;
-    private Collider2D col;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
     }
 
     public void Moving(float mspeed)
     {
         bool isCanRotate = GameObject.FindGameObjectWithTag("CanRotate").GetComponent<wayPointScript>().CanRotate;
 
-        if (isCanRotate == true)
+        if (isCanRotate)
         {
             rb.velocity = Vector3.zero;
             nextwayPoints++;
@@ -33,11 +31,9 @@ public class EnemyController : MonoBehaviour
         else if (gameObject.transform.position.x < wayPoints[nextwayPoints].position.x)
             rb.velocity = new Vector2(mspeed, 0);
 
+        if (gameObject.transform.position.x == wayPoints[nextwayPoints].position.x - 1f && gameObject.transform.position.y == wayPoints[nextwayPoints].position.y)
+            Debug.Log("2");
 
-    }
 
-    void Die()
-    {
-        Destroy(gameObject);
     }
 }

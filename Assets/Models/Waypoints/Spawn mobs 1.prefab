@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c918882dc72e042b54fbef8bdc844c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positionSpawn: {x: 0, y: 0}
   mobs:
   - {fileID: 5770253311061181860, guid: 30f21e96151240c40b2b65722bca97b3, type: 3}
   - {fileID: 7824856202644504451, guid: a55eb09610271cb4f8ccfda12540ccd3, type: 3}
