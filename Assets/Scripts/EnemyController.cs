@@ -1,39 +1,80 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
 public class EnemyController : MonoBehaviour
 {
-    public int nextwayPoints = 1;
-    public Transform[] wayPoints;
-    private Rigidbody2D rb;
-
-    private void Start()
+    public enum PathTypes
     {
-        rb = GetComponent<Rigidbody2D>();
+        linear,
+        loop
     }
 
-    public void Moving(float mspeed)
-    {
-        bool isCanRotate = GameObject.FindGameObjectWithTag("CanRotate").GetComponent<wayPointScript>().CanRotate;
+    public PathTypes pathType;
+    public int movementDirection = 1;
+    public int movingTo = 0;
+    public Transform[] PathElements;
 
-        if (isCanRotate)
+    public void OnDrawGizmos()
+    {
+        if (PathElements == null || PathElements.Length < 20)
         {
-            rb.velocity = Vector3.zero;
-            nextwayPoints++;
+            return;
         }
 
-        Debug.Log(nextwayPoints);
-            
-        if (gameObject.transform.position.y > wayPoints[nextwayPoints].position.y)
-            rb.velocity = new Vector2(0, -mspeed);
-        else if(gameObject.transform.position.y < wayPoints[nextwayPoints].position.y)
-            rb.velocity = new Vector2(0, mspeed);
-        if (gameObject.transform.position.x > wayPoints[nextwayPoints].position.x)
-            rb.velocity = new Vector2(-mspeed, 0);
-        else if (gameObject.transform.position.x < wayPoints[nextwayPoints].position.x)
-            rb.velocity = new Vector2(mspeed, 0);
+        for (var i = 1; i < PathElements.Length; i++)
+        {
+            Gizmos.DrawLine(PathElements[i - 1].position, PathElements[i].position);
+        }
 
-        if (gameObject.transform.position.x == wayPoints[nextwayPoints].position.x - 1f && gameObject.transform.position.y == wayPoints[nextwayPoints].position.y)
-            Debug.Log("2");
+        if (pathType == PathTypes.loop)
+        {
+            Gizmos.DrawLine(PathElements[0].position, PathElements[PathElements.Length - 1].position);
+        }
+    }
 
+    public IEnumerator<Transform> GetNextPathPoint()
+    {
+        if (PathElements == null || PathElements.Length < 1)
+        {
+            yield break;
+        }
 
+        while (true)
+        {
+            yield return PathElements[movingTo];
+
+            if (PathElements.Length == 1)
+            {
+                continue;
+            }
+
+            if (pathType == PathTypes.linear)
+            {
+                if (movingTo <= 0)
+                {
+                    movementDirection = 1;
+                }
+                else if (movingTo >= PathElements.Length - 1)
+                {
+                    movementDirection = -1;
+                }
+            }
+
+            movingTo = movingTo + movementDirection;
+
+            if(pathType == PathTypes.loop)
+            {
+                if(movingTo >= PathElements.Length)
+                {
+                    movingTo = 0;
+                }
+
+                if(movingTo < 0)
+                {
+                    movingTo = PathElements.Length - 1;
+                }
+            }
+        }
     }
 }

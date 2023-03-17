@@ -38,7 +38,7 @@ public class SpawnMobController : MonoBehaviour
                 mob = Instantiate(mobs[Random.Range(0, 3)]);
             }
 
-            mob.GetComponent<EnemyController>().wayPoints = wayPoints;
+            //mob.GetComponent<EnemyController>().wayPoints = wayPoints;
 
             mob.transform.position = positionSpawn;
 
