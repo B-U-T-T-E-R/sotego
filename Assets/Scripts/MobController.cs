@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class MobController : EnemyController
 {
-    public enum MovementType
-    {
-        Moving,
-        Lerping
-    }
-
-    public MovementType Type = MovementType.Moving;
-    public MovementType MyPath;
     public float speed = 1f;
     public float maxDistance = .1f;
 
@@ -19,8 +11,6 @@ public class MobController : EnemyController
 
     void Start()
     {
-        if (MyPath == null)
-            return;
 
         pointInPath = GetNextPathPoint();
 
@@ -34,20 +24,13 @@ public class MobController : EnemyController
 
     private void Update()
     {
-        if(pointInPath == null || pointInPath.Current == null)
+        if (pointInPath == null || pointInPath.Current == null)
             return;
 
-        if(Type == MovementType.Moving)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, pointInPath.Current.position, Time.deltaTime * speed);
-        }
-        else if(Type == MovementType.Lerping)
-        {
-            transform.position = Vector2.Lerp(transform.position, pointInPath.Current.position, Time.deltaTime * speed);
-        }
+        transform.position = Vector2.MoveTowards(transform.position, pointInPath.Current.position, Time.deltaTime * speed);
 
         var distanceSquare = (transform.position - pointInPath.Current.position).sqrMagnitude;
-        if(distanceSquare < maxDistance * maxDistance) 
+        if (distanceSquare < maxDistance * maxDistance)
         {
             pointInPath.MoveNext();
         }
