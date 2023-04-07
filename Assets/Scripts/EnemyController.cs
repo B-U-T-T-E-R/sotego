@@ -3,44 +3,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public enum PathTypes
-    {
-        linear,
-        loop
-    }
-
-    public PathTypes pathType;
     public int movementDirection = 1;
     public int movingTo = 0;
     public Transform[] PathElements;
-
-    private void Start()
-    {
-        PathElements = GameObject.FindWithTag("Spawn").GetComponent<SpawnMobController>().wayPoints;
-    }
 
     private void FixedUpdate()
     {
         if (movementDirection == -1)
             Die();
-    }
-
-    public void OnDrawGizmos()
-    {
-        if (PathElements == null || PathElements.Length < 20)
-        {
-            return;
-        }
-
-        for (var i = 1; i < PathElements.Length; i++)
-        {
-            Gizmos.DrawLine(PathElements[i - 1].position, PathElements[i].position);
-        }
-
-        if (pathType == PathTypes.loop)
-        {
-            Gizmos.DrawLine(PathElements[0].position, PathElements[PathElements.Length - 1].position);
-        }
     }
 
     public IEnumerator<Transform> GetNextPathPoint()
@@ -59,32 +29,16 @@ public class EnemyController : MonoBehaviour
                 continue;
             }
 
-            if (pathType == PathTypes.linear)
+            if (movingTo <= 0)
             {
-                if (movingTo <= 0)
-                {
-                    movementDirection = 1;
-                }
-                else if (movingTo >= PathElements.Length - 1)
-                {
-                    movementDirection = -1;
-                }
+                movementDirection = 1;
+            }
+            else if (movingTo >= PathElements.Length - 1)
+            {
+                movementDirection = -1;
             }
 
             movingTo = movingTo + movementDirection;
-
-            if(pathType == PathTypes.loop)
-            {
-                if(movingTo >= PathElements.Length)
-                {
-                    movingTo = 0;
-                }
-
-                if(movingTo < 0)
-                {
-                    movingTo = PathElements.Length - 1;
-                }
-            }
         }
     }
 
