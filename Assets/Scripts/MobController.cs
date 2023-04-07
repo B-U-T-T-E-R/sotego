@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommonMobController : EnemyController
+public class MobController : EnemyController
 {
     public enum MovementType
     {

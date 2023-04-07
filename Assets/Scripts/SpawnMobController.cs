@@ -1,33 +1,54 @@
+using System;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class SpawnMobController : MonoBehaviour
 {
-    [HideInInspector]
+    [SerializeField]
     private int currentCountWave;
+    [SerializeField]
+    private int LastWave;
     [SerializeField]
     private Vector2 positionSpawn;
     [SerializeField]
     private GameObject[] mobs;
-    [SerializeField]
-    private bool canSpawn;
     [SerializeField]
     private int maxCountMobs;
     private GameObject mob;
     [HideInInspector]
     public int currentCountMobsOnWave;
     public Transform[] wayPoints;
+    private GameObject[] gm;
+    private bool isMaxMob;
+
+    int time;
+    int time1;
 
     void Start()
     {
         positionSpawn = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        canSpawn = true;
+        time = DateTime.Now.Second;
     }
 
-    void Update() => Spawn();
+    void Update()
+    {
+        Spawn();
+    }
+
+    private void FixedUpdate()
+    {
+        gm = GameObject.FindGameObjectsWithTag("Entity");
+    }
 
     private void Spawn()
     {
-        if (currentCountMobsOnWave != maxCountMobs && canSpawn == true)
+        if (currentCountMobsOnWave != 5)
+            time1 = DateTime.Now.Second;
+
+        if(currentCountMobsOnWave == maxCountMobs)
+            isMaxMob = true;
+
+        if (currentCountMobsOnWave != maxCountMobs && time1 - time == 1)
         {
             if (currentCountWave <= 10)
             {
@@ -35,22 +56,24 @@ public class SpawnMobController : MonoBehaviour
             }
             else
             {
-                mob = Instantiate(mobs[Random.Range(0, 3)]);
+                mob = Instantiate(mobs[UnityEngine.Random.Range(0, 3)]);
             }
-
-            //mob.GetComponent<EnemyController>().wayPoints = wayPoints;
 
             mob.transform.position = positionSpawn;
 
             currentCountMobsOnWave++;
-            canSpawn = false;
+            time = DateTime.Now.Second;
         }
-        canSpawn = CanSpawnMethod();
+
+        if (currentCountMobsOnWave == 0 && isMaxMob)
+        {
+            LastWave = currentCountWave;
+            currentCountWave++;
+            isMaxMob = false;
+        }
+
+        currentCountMobsOnWave = gm.Length;
     }
 
-    private bool CanSpawnMethod()
-    {
-        bool f = false;
-        return f = GameObject.FindGameObjectWithTag("CanSpawnBlock").GetComponent<SpawnScript>().CanSpawn;
-    }
+    
 }

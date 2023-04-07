@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +13,17 @@ public class EnemyController : MonoBehaviour
     public int movementDirection = 1;
     public int movingTo = 0;
     public Transform[] PathElements;
+
+    private void Start()
+    {
+        PathElements = GameObject.FindWithTag("Spawn").GetComponent<SpawnMobController>().wayPoints;
+    }
+
+    private void FixedUpdate()
+    {
+        if (movementDirection == -1)
+            Die();
+    }
 
     public void OnDrawGizmos()
     {
@@ -76,5 +86,10 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
