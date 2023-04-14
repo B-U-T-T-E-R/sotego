@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,8 +28,8 @@ public class MobController : EnemyController
 
         transform.position = Vector2.MoveTowards(transform.position, pointInPath.Current.position, Time.deltaTime * speed);
 
-        var distanceSquare = (transform.position - pointInPath.Current.position).sqrMagnitude;
-        if (distanceSquare < maxDistance * maxDistance)
+        var distanceSquare = (transform.position - pointInPath.Current.position);
+        if (distanceSquare.magnitude < maxDistance)
         {
             pointInPath.MoveNext();
         }

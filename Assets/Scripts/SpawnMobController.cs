@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
+using UnityEngine.UI;
 
 public class SpawnMobController : MonoBehaviour
 {
@@ -20,14 +20,16 @@ public class SpawnMobController : MonoBehaviour
     public Transform[] wayPoints;
     private GameObject[] gm;
     private bool isMaxMob;
+    [SerializeField]
+    Text text;  
 
     int time;
-    int time1;
+    int time1 = 18;
 
     void Start()
     {
         positionSpawn = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        time = DateTime.Now.Second;
+        time = time1;
     }
 
     void Update()
@@ -38,17 +40,24 @@ public class SpawnMobController : MonoBehaviour
     private void FixedUpdate()
     {
         gm = GameObject.FindGameObjectsWithTag("Entity");
+        time--;
     }
 
     private void Spawn()
     {
-        if (currentCountMobsOnWave != 5)
-            time1 = DateTime.Now.Second;
+        text.text = currentCountWave.ToString();
 
         if(currentCountMobsOnWave == maxCountMobs)
             isMaxMob = true;
 
-        if (currentCountMobsOnWave != maxCountMobs && time1 - time == 1)
+        if (currentCountMobsOnWave == 0 && isMaxMob)
+        {
+            LastWave = currentCountWave;
+            currentCountWave++;
+            isMaxMob = false;
+        }
+
+        if (currentCountMobsOnWave != maxCountMobs && time <= 0 && !isMaxMob)
         {
             if (currentCountWave <= 10)
             {
@@ -62,14 +71,7 @@ public class SpawnMobController : MonoBehaviour
             mob.transform.position = positionSpawn;
 
             currentCountMobsOnWave++;
-            time = DateTime.Now.Second;
-        }
-
-        if (currentCountMobsOnWave == 0 && isMaxMob)
-        {
-            LastWave = currentCountWave;
-            currentCountWave++;
-            isMaxMob = false;
+            time = time1;
         }
 
         currentCountMobsOnWave = gm.Length;
