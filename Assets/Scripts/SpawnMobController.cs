@@ -21,7 +21,8 @@ public class SpawnMobController : MonoBehaviour
     private GameObject[] gm;
     private bool isMaxMob;
     [SerializeField]
-    Text text;  
+    Text text;
+    private int value;
 
     int time;
     int time1 = 18;
@@ -52,6 +53,7 @@ public class SpawnMobController : MonoBehaviour
 
         if (currentCountMobsOnWave == 0 && isMaxMob)
         {
+            value = UnityEngine.Random.Range(0, 3);
             LastWave = currentCountWave;
             currentCountWave++;
             isMaxMob = false;
@@ -65,7 +67,7 @@ public class SpawnMobController : MonoBehaviour
             }
             else
             {
-                mob = Instantiate(mobs[UnityEngine.Random.Range(0, 3)]);
+                mob = Instantiate(mobs[value]);
             }
 
             mob.transform.position = positionSpawn;
